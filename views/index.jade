@@ -1,5 +1,41 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  html
+    head
+      title CV #{cvData.name}
+      link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+      .container
+        .header
+          img(src="https://avatars.githubusercontent.com/u/49185211?v=4", alt="Foto Profil", class="profile-img")
+          h1 #{cvData.name}
+          p.contact-info
+            strong Nama:</strong> #{cvData.name}
+            br
+            strong Alamat:</strong> #{cvData.address}
+            br
+            strong Email:</strong> #{cvData.email}
+            br
+            strong No. Telepon:</strong> #{cvData.phone}
+        .content
+          .section
+            h2 Pendidikan
+            .education-list
+              each edu in cvData.education
+                .education-item
+                  h3 #{edu.school}
+                  p.degree #{edu.degree}
+                  p.major #{edu.major}
+                  p.years #{edu.years}
+          .section
+            h2 Pengalaman Kerja
+            .experience-list
+              each expr in cvData.experience
+                .experience-item
+                  h3 #{expr.company}
+                  p.position #{expr.position}
+                  p.years #{expr.years}
+                  p.description #{expr.description}
+        .footer
+          p Terima kasih telah melihat CV #{cvData.name}.
